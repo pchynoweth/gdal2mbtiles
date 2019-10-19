@@ -40,8 +40,8 @@ import time
 import io
 import os
 import json
-from PyQt4.QtCore import pyqtSlot
-from PyQt4 import QtCore
+from PyQt5.QtCore import pyqtSlot
+from PyQt5 import QtCore
 
 if getattr(sys, 'frozen', False):
     app_path = os.path.dirname(sys.executable)
