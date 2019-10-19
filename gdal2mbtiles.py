@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 # ******************************************************************************
 #  $Id$
@@ -671,10 +671,10 @@ class GDAL2Mbtiles(object):
         # Output the results
 
         if self.options.verbose:
-            print("Options:", self.options)
-            print("Input:", self.input)
-            print("Output:", self.output)
-            print("Cache: %s MB" % (gdal.GetCacheMax() / 1024 / 1024))
+            print(("Options:", self.options))
+            print(("Input:", self.input))
+            print(("Output:", self.output))
+            print(("Cache: %s MB" % (gdal.GetCacheMax() / 1024 / 1024)))
             print('')
 
     # -------------------------------------------------------------------------
@@ -776,8 +776,8 @@ class GDAL2Mbtiles(object):
             raise Exception("No input file was specified")
 
         if self.options.verbose:
-            print("Input file:",
-                  "( %sP x %sL - %s bands)" % (self.in_ds.RasterXSize, self.in_ds.RasterYSize, self.in_ds.RasterCount))
+            print(("Input file:",
+                  "( %sP x %sL - %s bands)" % (self.in_ds.RasterXSize, self.in_ds.RasterYSize, self.in_ds.RasterCount)))
 
         if not self.in_ds:
             # Note: GDAL prints the ERROR message too
@@ -808,15 +808,15 @@ class GDAL2Mbtiles(object):
                 self.in_nodata = nds
 
         if self.options.verbose:
-            print("NODATA: %s" % self.in_nodata)
+            print(("NODATA: %s" % self.in_nodata))
 
         #
         # Here we should have RGBA input dataset opened in self.in_ds
         #
 
         if self.options.verbose:
-            print("Preprocessed file:",
-                  "( %sP x %sL - %s bands)" % (self.in_ds.RasterXSize, self.in_ds.RasterYSize, self.in_ds.RasterCount))
+            print(("Preprocessed file:",
+                  "( %sP x %sL - %s bands)" % (self.in_ds.RasterXSize, self.in_ds.RasterYSize, self.in_ds.RasterCount)))
 
         # Spatial Reference System of the input raster
 
@@ -951,8 +951,8 @@ class GDAL2Mbtiles(object):
                            "Use --s_srs ESPG:xyz (or similar) to provide source reference system.")
 
             if self.out_ds and self.options.verbose:
-                print("Projected file:", "tiles.vrt", "( %sP x %sL - %s bands)" % (
-                    self.out_ds.RasterXSize, self.out_ds.RasterYSize, self.out_ds.RasterCount))
+                print(("Projected file:", "tiles.vrt", "( %sP x %sL - %s bands)" % (
+                    self.out_ds.RasterXSize, self.out_ds.RasterYSize, self.out_ds.RasterCount)))
 
         if not self.out_ds:
             self.out_ds = self.in_ds
@@ -1013,7 +1013,7 @@ class GDAL2Mbtiles(object):
         # Note: maybe round(x, 14) to avoid the gdal_translate behaviour, when 0 becomes -1e-15
 
         if self.options.verbose:
-            print("Bounds (output srs):", round(self.ominx, 13), self.ominy, self.omaxx, self.omaxy)
+            print(("Bounds (output srs):", round(self.ominx, 13), self.ominy, self.omaxx, self.omaxy))
 
         #
         # Calculating ranges for tiles in different zoom levels
@@ -1048,10 +1048,10 @@ class GDAL2Mbtiles(object):
                 self.tmaxz = self.mercator.ZoomForPixelSize(self.out_gt[1])
 
             if self.options.verbose:
-                print("Bounds (latlong):", self.mercator.MetersToLatLon(self.ominx, self.ominy),
-                      self.mercator.MetersToLatLon(self.omaxx, self.omaxy))
-                print('MinZoomLevel:', self.tminz)
-                print("MaxZoomLevel:", self.tmaxz, "(", self.mercator.Resolution(self.tmaxz), ")")
+                print(("Bounds (latlong):", self.mercator.MetersToLatLon(self.ominx, self.ominy),
+                      self.mercator.MetersToLatLon(self.omaxx, self.omaxy)))
+                print(('MinZoomLevel:', self.tminz))
+                print(("MaxZoomLevel:", self.tmaxz, "(", self.mercator.Resolution(self.tmaxz), ")"))
 
         if self.options.profile == 'geodetic':
 
@@ -1082,7 +1082,7 @@ class GDAL2Mbtiles(object):
                 self.tmaxz = self.geodetic.ZoomForPixelSize(self.out_gt[1])
 
             if self.options.verbose:
-                print("Bounds (latlong):", self.ominx, self.ominy, self.omaxx, self.omaxy)
+                print(("Bounds (latlong):", self.ominx, self.ominy, self.omaxx, self.omaxy))
 
         if self.options.profile == 'raster':
 
@@ -1092,7 +1092,7 @@ class GDAL2Mbtiles(object):
                                       math.ceil(log2(self.out_ds.RasterYSize / float(self.tilesize)))))
 
             if self.options.verbose:
-                print("Native zoom of the raster:", self.nativezoom)
+                print(("Native zoom of the raster:", self.nativezoom))
 
             # Get the minimal zoom level (whole raster in one tile)
             if self.tminz == None:
@@ -1185,7 +1185,7 @@ class GDAL2Mbtiles(object):
                     f = open(os.path.join(output_dir, 'metadata.json'), 'w')
                     f.write(json.dumps(metadata_dict))
                     f.close()
-                    for n, v in metadata_dict.items():
+                    for n, v in list(metadata_dict.items()):
                         cur.execute("INSERT INTO metadata (name,value) values (?,?)", (n, v))
 
 
@@ -1266,8 +1266,8 @@ class GDAL2Mbtiles(object):
         querysize = self.querysize
 
         if self.options.verbose:
-            print("dataBandsCount: ", self.dataBandsCount)
-            print("tilebands: ", tilebands)
+            print(("dataBandsCount: ", self.dataBandsCount))
+            print(("tilebands: ", tilebands))
 
         # print tminx, tminy, tmaxx, tmaxy
         tcount = (1 + abs(tmaxx - tminx)) * (1 + abs(tmaxy - tminy))
@@ -1298,7 +1298,7 @@ class GDAL2Mbtiles(object):
                     # already exist
                     continue
                 if self.options.verbose:
-                    print(ti, '/', tcount, tilefilename)  # , "( TileMapService: z / x / y )"
+                    print((ti, '/', tcount, tilefilename))  # , "( TileMapService: z / x / y )"
 
                 if self.options.resume and os.path.exists(tilefilename):
                     if self.options.verbose:
@@ -1322,7 +1322,7 @@ class GDAL2Mbtiles(object):
                     rb, wb = self.geo_query(ds, b[0], b[3], b[2], b[1])
                     nativesize = wb[0] + wb[2]  # Pixel size in the raster covering query geo extent
                     if self.options.verbose:
-                        print("\tNative Extent (querysize", nativesize, "): ", rb, wb)
+                        print(("\tNative Extent (querysize", nativesize, "): ", rb, wb))
 
                     # Tile bounds in raster coordinates for ReadRaster query
                     rb, wb = self.geo_query(ds, b[0], b[3], b[2], b[1], querysize=querysize)
@@ -1359,7 +1359,7 @@ class GDAL2Mbtiles(object):
                         wy = self.tilesize - wysize
 
                 if self.options.verbose:
-                    print("\tReadRaster Extent: ", (rx, ry, rxsize, rysize), (wx, wy, wxsize, wysize))
+                    print(("\tReadRaster Extent: ", (rx, ry, rxsize, rysize), (wx, wy, wxsize, wysize)))
 
                 # Query is in 'nearest neighbour' but can be bigger in then the tilesize
                 # We scale down the query to the tilesize by supplied algorithm.
@@ -1451,7 +1451,7 @@ class GDAL2Mbtiles(object):
                 tilefilename = os.path.join(self.output, str(tz), str(tx), "%s.%s" % (ty_final, self.tileext))
 
                 if self.options.verbose:
-                    print(ti, '/', tcount, tilefilename)  # , "( TileMapService: z / x / y )"
+                    print((ti, '/', tcount, tilefilename))  # , "( TileMapService: z / x / y )"
 
                 if self.options.resume and os.path.exists(tilefilename):
                     if self.options.verbose:
@@ -1525,8 +1525,8 @@ class GDAL2Mbtiles(object):
                 del dstile
 
                 if self.options.verbose:
-                    print("\tbuild from zoom", tz + 1, " tiles:", (2 * tx, 2 * ty), (2 * tx + 1, 2 * ty),
-                          (2 * tx, 2 * ty + 1), (2 * tx + 1, 2 * ty + 1))
+                    print(("\tbuild from zoom", tz + 1, " tiles:", (2 * tx, 2 * ty), (2 * tx + 1, 2 * ty),
+                          (2 * tx, 2 * ty + 1), (2 * tx + 1, 2 * ty + 1)))
 
                 if not self.options.verbose:
                     queue.put(tcount)
@@ -2774,4 +2774,4 @@ def main(progress,argv = None):
 if __name__ == '__main__':
     progress = ProgressBar()
     t = main(progress)
-    print ('Tiling took: {:.2f} seconds '.format(t))
+    print(('Tiling took: {:.2f} seconds '.format(t)))

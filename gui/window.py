@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import sys, os, time
 import logging
-from Queue import Queue
+from queue import Queue
 from PyQt4 import uic as UI
 from PyQt4.QtCore import QThread
 from PyQt4.QtCore import pyqtSlot
@@ -32,7 +32,7 @@ class ConvThread(QThread):
         self.func = func
 
     def run(self):
-        self.loop.emit(u'Петля')
+        self.loop.emit('Петля')
         self.func()
 
     def stop(self):
@@ -51,7 +51,7 @@ class MainWindow():
         self.version = version
         self.mw = UI.loadUi('gui.ui')
 
-        self.mw.setWindowTitle(u'Tiler (Version ' + self.version + u')')
+        self.mw.setWindowTitle('Tiler (Version ' + self.version + ')')
         self.mw.pushbutton_input.clicked.connect(self.set_input)
         self.mw.pushbutton_output.clicked.connect(self.set_output)
         # self.mw.pushbutton_start.clicked.connect(self.start)
@@ -100,7 +100,7 @@ class MainWindow():
     def set_output(self):
         options = QtGui.QFileDialog.DontResolveSymlinks | QtGui.QFileDialog.DontUseNativeDialog
         fileName = QtGui.QFileDialog.getSaveFileName(self.mw,
-                                                     u"Output",
+                                                     "Output",
                                                      # os.path.dirname(str(self.Label_RSC.text().toUtf8())),
                                                      str(self.mw.label_output.text().toUtf8()),
                                                      ".mbtiles(*.mbtiles);;All Files (*)", "",options)
