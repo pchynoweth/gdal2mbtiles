@@ -83,4 +83,9 @@ in order to write tiles directly into Mbtiles database.
 
 # Example
   `gdal2mbtiles.py input.tif -z 12-14 -a 0 output.mbtiles`
-  
+
+# Docker Example
+
+```
+docker run --rm -it -v $PWD:/work -w /work pchynoweth/gdal2mbtiles:latest gdal2mbtiles SR_HR.tif -z 0-6 -w all SR_HR.mbtiles
+```
