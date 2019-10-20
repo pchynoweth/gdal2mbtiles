@@ -2284,15 +2284,13 @@ class GDAL2Mbtiles(object):
         s = {
             "name": args['title'],
             "description": args['htmltitle'],
-            "version": "1.0.0",
+            "version": "1.1",
             "attribution": args['copyright'],
             "type": "overlay",
             "format": args['tileformat'],
             "minzoom": args['minzoom'],
             "maxzoom": args['maxzoom'],
-            "bounds": str(args['south']) + " " + str(args['west']) + " " + str(args['north']) + " " + str(args['east']),
-            "scale": "1",
-            "profile": "mercator"
+            "bounds": str(args['west']) + ',' + str(args['south']) + ',' + str(args['east']) + ',' + str(args['north'])
         }
         return s
 

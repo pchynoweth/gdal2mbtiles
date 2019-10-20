@@ -10,9 +10,9 @@ in order to write tiles directly into Mbtiles database.
 
 # Requirements
 
-* [GDAL 2.X.X](https://pypi.python.org/pypi/GDAL/)
-* [PIL\Pillow] (https://pypi.python.org/pypi/Pillow/4.0.0)
-* [PyQt4](https://pypi.python.org/pypi/PyQt4/4.11.4)
+* [GDAL 3.X.X](https://pypi.python.org/pypi/GDAL/)
+* [PIL\Pillow](https://pypi.python.org/pypi/Pillow/4.0.0)
+* [PyQt5](https://pypi.org/project/PyQt5/5.13.1)
 
 # Basic Usage
 
@@ -70,7 +70,7 @@ in order to write tiles directly into Mbtiles database.
   
     Options for config parameters
 
-    `-x, --auxfiles`      Generate aux.xml files.
+    `-x, --auxfiles`    Generate aux.xml files.
     
     `-f OUTPUT_FORMAT, --format=OUTPUT_FORMAT`
                         Image format for output tiles. Just PNG and JPEG
