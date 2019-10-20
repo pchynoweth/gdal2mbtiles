@@ -50,17 +50,6 @@ elif __file__:
     app_path = os.path.dirname(__file__)
     lib_dir = os.path.normpath(os.path.join(os.path.abspath(os.path.dirname(__file__)), '..', 'lib'))
 
-# Uncomment to use local GDAL
-environ_list = os.environ['PATH'].split(';')
-environ_list.insert(0, os.path.join(lib_dir, 'GDAL'))
-environ_list.insert(0, os.path.join(os.getcwd(), 'lib/Python27/Scripts'))
-environ_list.insert(0, os.path.join(os.getcwd(), 'lib/Python27'))
-os.environ['PATH'] = ';'.join(environ_list)
-os.environ['GDAL_DRIVER_PATH'] = os.path.join(lib_dir, '/GDAL', 'gdalplugins')
-os.environ['GDAL_DATA'] = os.path.join(lib_dir, 'GDAL', 'gdal-data')
-os.environ['PROJ_LIB'] = os.path.join(lib_dir, 'GDAL', 'projlib')
-os.environ['PROJ_DEBUG'] = 'ON'
-
 try:
     from osgeo import gdal
     from osgeo import osr
